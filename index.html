@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>printdata</title>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .vl {
+        border-left: 1px solid black;
+        height: auto;
+        text-align: center;
+    }
+    .pt-3-half {
+        padding-top: 1.4rem;
+    }
+    tfoot select {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+    tfoot select::-ms-expand {
+        display: none;
+    }
+    td {
+        word-break: break-all;
+    }
+    body button {
+        float: right;
+        border: none;
+        margin: 10px;
+    }
+    table.table tfoot {
+        display: table-row-group;
+    }
+    @media print {
+        #printbtn, #addNewRow, #removeRow, #add {
+            display: none;
+        }
+    }
+</style>
+<body>
+
+    <header>
+        <img src="industrial-engineers-logo.png" width="100%" height="100px">
+        <div class="container" style="display: flex;">
+        <h5 style="flex-basis: 40%;">
+            <div style="display: flex;">
+            <p><i class="fas fa-mobile-alt" id="iconaddress"></i></p>
+            <p style="margin-left: 8.5px;">+91 94442 13520 | +91 98409 88641</p>
+            </div>
+            <p><i class="fas fa-phone-alt" id="iconaddress"></i>
+             +91 44 22731171 | +91 44 22730829</p>
+            <div style="display: flex;">
+            <p><i class="far fa-envelope" id="iconaddress"></i></p>
+            <p style="margin-left: 4px;">indusengg1985@yahoo.com |<br>info@industrialengineersindia.com</p>
+            </div>
+            <div style="display: flex;">
+            <p><i class="fas fa-map-marker-alt" id="iconaddress"></i></p>
+            <address style="margin-left: 4px;">17, Kumarasamy Street,<br>Lakshmipuram, Chrompet,<br>Chennai-44.</address>
+            </div>
+        </h5>
+        <div class="vl"></div>
+        <div style="float: right; flex-basis: 60%;" id="to-address">  
+            <div style="display: flex;">
+                <p style="font-weight: bold; margin: 0px 30px; width: 61%;">To: </p>
+                <p contenteditable="true" id="to-content" style="width: 100%; word-break: break-all;"></p>
+            </div>
+            <div style="display: flex;">
+                <p style="font-weight: bold; margin: 0px 30px; width: 61%;">Party GST No: </p>
+                <p contenteditable="true" id="to-content" style="width: 100%; word-break: break-all;"></p>
+            </div>
+            <div style="display: flex;">
+                <p style="font-weight: bold; margin: 0px 30px; width: 61%;">Party DC No: </p>
+                <p contenteditable="true" id="to-content" style="width: 100%; word-break: break-all;"></p>
+            </div>
+            <div style="display: flex;">
+                <p style="font-weight: bold; margin: 0px 30px; width: 61%;">Party Order No: </p>
+                <p contenteditable="true" id="to-content" style="width: 100%; word-break: break-all;"></p>
+            </div>
+            <div style="display: flex;">
+                <p style="font-weight: bold; margin: 0px 30px; width: 61%;">Despatch Through: </p>
+                <p contenteditable="true" id="to-content" style="width: 100%; word-break: break-all;"></p>
+            </div>
+        </div>
+    </div>     
+    </header>
+
+    <div class="container-fluid">
+        <button onclick="window.print()" id="printbtn" title="Print this page"><i class="fas fa-print"></i></button><br>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <table class="table table-bordered table-fixed-md text-center">
+                    <thead>
+                        <div>
+                        <tr>
+                            <th class="text-center" width="10px" style="border-right: none;">No:<th width="5px" contenteditable="true" style="border-left: none;"></th></th>
+                            <th class="text-center">GST No - 33ABFPK2348P1ZF</th>
+                            <th class="text-center" width="500px" colspan="2">Date:  <input type="date" class="text-center" style="border: none;"></th>
+                        </tr>
+                        </div>
+                        <div>    
+                        <tr>
+                            <th class="text-center" width="150px" colspan="2">SI No</th>
+                            <th class="text-center" width="2250px">Description</th>
+                            <th class="text-center" width="200px">Qty</th>
+                            <th class="text-center" width="300px">Value in Rs<br>(Approx)</th>
+                            <th class="text-center" width="50px" id="add"><span class="table-add" title="Add New Row" id="addNewRow" style="color: green; cursor: pointer;"><i class="fas fa-plus" aria-hidden="true"></i></span></th>
+                        </tr>
+                        </div>
+                    </thead>
+                    <tbody id="dataTable">
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="text-center" colspan="2">GST :<td class="pt-3-half" contenteditable="true"></td></th>
+                            <th class="text-center">Return<td class="pt-3-half">
+                            <select style="border: none; cursor: pointer;">
+                                <option value="">---Select---</option>
+                                <option value="nil">NIL</option>
+                                <option value="returned">Returned</option>   
+                            </select></td></th>    
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#addNewRow').on('click', function() {
+                $('#dataTable').append(`<tr>
+                <td class="pt-3-half" contenteditable="true" colspan="2"></td>
+                <td class="pt-3-half" contenteditable="true"></td>
+                <td class="pt-3-half" contenteditable="true"></td>
+                <td class="pt-3-half" contenteditable="true"></td>
+                <td class="text-center" width="50px" id="removeRow"><span class="table-remove" title="Delete" style="color: red; cursor:pointer;"><i class="fas fa-trash" aria-hidden="true"></i></span></td>
+                </tr>`);
+            });
+            $('#dataTable').on('click', '#removeRow', function() {
+               var child = $(this).closest('tr').nextAll();
+            $(this).closest('tr').remove();   
+            });
+        });
+    </script>
+
+</body>
+</html>
